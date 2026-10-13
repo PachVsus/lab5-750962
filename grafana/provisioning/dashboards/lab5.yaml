@@ -1,0 +1,11 @@
+apiVersion: 1
+providers:
+  - name: Lab5 750962
+    orgId: 1
+    folder: Lab 5
+    type: file
+    disableDeletion: true
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: ${LAB5_GRAFANA_DASHBOARDS}

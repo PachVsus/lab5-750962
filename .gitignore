@@ -1,0 +1,28 @@
+# Archivos locales y sensibles del laboratorio
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+terraform.tfvars
+*.auto.tfvars
+crash.log
+crash.*.log
+.env
+.env.*
+.aws/
+certs/
+*.pem
+*.key
+.venv/
+__pycache__/
+*.pyc
+# Conservar .terraform.lock.hcl en Git.
+client-config.json
+lambda.zip
+.tools/
+.runtime/
+
+*.tfvars.json
+*.pfx
+*.p12
+*.log

@@ -1,0 +1,22 @@
+services:
+  grafana:
+    image: grafana/grafana:13.2.4
+    container_name: lab5-grafana-750962
+    ports:
+      - "127.0.0.1:${LAB5_GRAFANA_PORT:-3005}:3000"
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:?Falta AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:?Falta AWS_SECRET_ACCESS_KEY}
+      AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN:?Falta AWS_SESSION_TOKEN}
+      AWS_REGION: us-east-1
+      AWS_DEFAULT_REGION: us-east-1
+      LAB5_GRAFANA_DASHBOARDS: /etc/grafana/lab5-dashboards
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      GF_PLUGINS_PREINSTALL_DISABLED: "true"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./provisioning:/etc/grafana/provisioning:ro
+      - ../.runtime/grafana/dashboards:/etc/grafana/lab5-dashboards:ro
+volumes:
+  grafana-data:

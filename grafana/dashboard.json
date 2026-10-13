@@ -1,0 +1,43 @@
+{
+  "__inputs": [{"name": "DS_CLOUDWATCH", "label": "CloudWatch", "description": "Fuente de datos AWS CloudWatch", "type": "datasource", "pluginId": "cloudwatch", "pluginName": "CloudWatch"}],
+  "annotations": {"list": []},
+  "editable": true,
+  "graphTooltip": 1,
+  "id": null,
+  "panels": [
+    {
+      "id": 1, "title": "Frecuencia cardiaca simulada — promedio por minuto", "type": "timeseries",
+      "datasource": {"type": "cloudwatch", "uid": "${DS_CLOUDWATCH}"},
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 0},
+      "fieldConfig": {"defaults": {"unit": "suffix:bpm", "min": 0}, "overrides": []},
+      "options": {"legend": {"displayMode": "list", "placement": "bottom"}, "tooltip": {"mode": "single"}},
+      "targets": [{"refId": "A", "region": "us-east-1", "namespace": "Lab5/750962", "metricName": "BPM", "dimensions": {"Usuario": "750962", "Sensor": "watch-750962"}, "statistic": "Average", "period": "60", "matchExact": true, "metricQueryType": 0, "metricEditorMode": 0, "queryMode": "Metrics"}]
+    },
+    {
+      "id": 2, "title": "Maximo del periodo (bpm)", "type": "stat",
+      "datasource": {"type": "cloudwatch", "uid": "${DS_CLOUDWATCH}"},
+      "gridPos": {"h": 5, "w": 12, "x": 0, "y": 10},
+      "fieldConfig": {"defaults": {"unit": "suffix:bpm", "color": {"mode": "fixed", "fixedColor": "blue"}}, "overrides": []},
+      "options": {"reduceOptions": {"calcs": ["max"], "fields": "", "values": false}, "colorMode": "value", "graphMode": "area"},
+      "targets": [{"refId": "A", "region": "us-east-1", "namespace": "Lab5/750962", "metricName": "BPM", "dimensions": {"Usuario": "750962", "Sensor": "watch-750962"}, "statistic": "Maximum", "period": "60", "matchExact": true, "metricQueryType": 0, "metricEditorMode": 0, "queryMode": "Metrics"}]
+    },
+    {
+      "id": 3, "title": "Lecturas sobre el umbral de demostracion", "type": "stat",
+      "description": "Regla educativa configurada en Lambda. No es una alerta clinica.",
+      "datasource": {"type": "cloudwatch", "uid": "${DS_CLOUDWATCH}"},
+      "gridPos": {"h": 5, "w": 12, "x": 12, "y": 10},
+      "fieldConfig": {"defaults": {"unit": "short", "color": {"mode": "fixed", "fixedColor": "orange"}}, "overrides": []},
+      "options": {"reduceOptions": {"calcs": ["sum"], "fields": "", "values": false}, "colorMode": "value", "graphMode": "none"},
+      "targets": [{"refId": "A", "region": "us-east-1", "namespace": "Lab5/750962", "metricName": "SuperaUmbralDemo", "dimensions": {"Usuario": "750962", "Sensor": "watch-750962"}, "statistic": "Sum", "period": "60", "matchExact": true, "metricQueryType": 0, "metricEditorMode": 0, "queryMode": "Metrics"}]
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 39,
+  "tags": ["lab5", "750962", "simulacion"],
+  "templating": {"list": []},
+  "time": {"from": "now-15m", "to": "now"},
+  "timezone": "browser",
+  "title": "Lab 5 — Frecuencia cardiaca — 750962",
+  "uid": "lab5-750962-heart",
+  "version": 1
+}
